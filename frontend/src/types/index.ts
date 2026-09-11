@@ -5,6 +5,7 @@ export interface LocationInfo {
   latitude: number;
   longitude: number;
   elevation_m: number;
+  is_in_india?: boolean;
 }
 
 export interface EnvironmentalData {
@@ -16,9 +17,11 @@ export interface EnvironmentalData {
   solar_radiation_w_m2: number;
   direct_radiation_w_m2?: number;
   diffuse_radiation_w_m2?: number;
+  current_measured_solar_w_m2?: number;
   precipitation_mm: number;
   cloud_cover_pct: number;
   source_type: string;
+  is_live?: boolean;
   observation_time: string;
 }
 
@@ -43,6 +46,8 @@ export interface SolarPosition {
   azimuth_deg: number;
   is_daylight: boolean;
   recommended_overhang_angle_deg: number;
+  peak_noon_altitude_deg?: number;
+  true_solar_time?: string;
 }
 
 export interface ClimateAnalysisResponse {
@@ -50,6 +55,11 @@ export interface ClimateAnalysisResponse {
   environmental_data: EnvironmentalData;
   climate_character: ClimateCharacter;
   solar_position: SolarPosition;
+  geographical_condition?: {
+    zone_id: string;
+    zone_name: string;
+    description: string;
+  };
 }
 
 export interface Component3DData {

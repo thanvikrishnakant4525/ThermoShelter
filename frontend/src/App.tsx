@@ -62,7 +62,8 @@ export const App: React.FC = () => {
         location.latitude,
         location.longitude,
         location.name,
-        location.elevation_m
+        location.elevation_m,
+        location.country
       );
       setClimateData(res);
       setCurrentStep(2); // Step 2: Climate & Site Diagnostics
@@ -122,7 +123,7 @@ export const App: React.FC = () => {
     setSelectedPurpose('Public waiting shelter');
 
     try {
-      const clim = await analyzeClimate(jodhpurLoc.latitude, jodhpurLoc.longitude, jodhpurLoc.name, jodhpurLoc.elevation_m);
+      const clim = await analyzeClimate(jodhpurLoc.latitude, jodhpurLoc.longitude, jodhpurLoc.name, jodhpurLoc.elevation_m, jodhpurLoc.country);
       setClimateData(clim);
 
       const gen = await generateShelterOptions({

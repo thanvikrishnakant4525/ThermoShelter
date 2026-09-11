@@ -250,6 +250,13 @@ export const MapPicker: React.FC<MapPickerProps> = ({
         <p className="text-xs sm:text-sm text-slate-600 mt-1">
           Choose where the shelter will be constructed and what primary purpose it serves. The recommendation engine will adapt the structure directly to this site and function.
         </p>
+        <div className="mt-3 flex items-center gap-2 text-[11px] sm:text-xs text-emerald-900 bg-emerald-50/90 border border-emerald-200 rounded-lg px-3 py-1.5 w-fit shadow-xs">
+          <span className="relative flex h-2 w-2 shrink-0">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+          </span>
+          <span><strong>All India Locations:</strong> Using actual live meteorological data. <strong>International:</strong> Adapted via geographical condition models.</span>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6">

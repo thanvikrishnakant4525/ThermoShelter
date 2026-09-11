@@ -10,7 +10,8 @@ import {
   ArrowLeft,
   Info,
   ShieldAlert,
-  Building2
+  Building2,
+  Globe
 } from 'lucide-react';
 import { ClimateAnalysisResponse } from '../types';
 
@@ -79,20 +80,37 @@ export const ClimateSummary: React.FC<ClimateSummaryProps> = ({
           </p>
         </div>
 
-        <div className={`self-start sm:self-auto flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium border ${
-          env.source_type.toLowerCase().includes('demo')
-            ? 'bg-amber-50 border-amber-300 text-amber-900 shadow-xs'
-            : 'bg-emerald-50 border-emerald-300 text-emerald-900 shadow-xs'
+        {/* Data Source Badge */}
+        <div className={`self-start sm:self-auto flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium border shadow-xs ${
+          env.is_live || env.source_type.toLowerCase().includes('live')
+            ? 'bg-emerald-50 border-emerald-300 text-emerald-900'
+            : env.source_type.toLowerCase().includes('geographical')
+            ? 'bg-blue-50 border-blue-300 text-blue-900'
+            : 'bg-amber-50 border-amber-300 text-amber-900'
         }`}>
-          <span className={`w-2 h-2 rounded-full shrink-0 ${
-            env.source_type.toLowerCase().includes('demo') ? 'bg-amber-500' : 'bg-emerald-500'
-          }`}></span>
-          <span>
-            <strong className="uppercase text-[10px] tracking-wider mr-1.5 px-1.5 py-0.5 rounded bg-white/70 font-bold">
-              {env.source_type.toLowerCase().includes('demo') ? 'Demo Data' : 'Live Data'}
+          {env.is_live || env.source_type.toLowerCase().includes('live') ? (
+            <span className="relative flex h-2.5 w-2.5 shrink-0">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+            </span>
+          ) : (
+            <span className={`w-2.5 h-2.5 rounded-full shrink-0 ${
+              env.source_type.toLowerCase().includes('geographical') ? 'bg-blue-500' : 'bg-amber-500'
+            }`}></span>
+          )}
+
+          <div className="flex items-center gap-1.5 flex-wrap">
+            <strong className="uppercase text-[10px] tracking-wider px-1.5 py-0.5 rounded bg-white/80 font-bold border border-slate-200/50">
+              {env.is_live || env.source_type.toLowerCase().includes('live')
+                ? 'Live Real-Time Data'
+                : env.source_type.toLowerCase().includes('geographical')
+                ? 'Geographical Demo Data'
+                : 'Demo Benchmark'}
             </strong>
-            {env.source_type}
-          </span>
+            <span className="text-[11px] truncate">
+              {env.source_type}
+            </span>
+          </div>
         </div>
       </div>
 
@@ -190,6 +208,22 @@ export const ClimateSummary: React.FC<ClimateSummaryProps> = ({
             </div>
           </div>
         </div>
+
+        {climate.geographical_condition && (
+          <div className="mt-3 bg-blue-50/70 p-3.5 sm:p-4 rounded-lg border border-blue-200">
+            <div className="flex items-start gap-2.5">
+              <Globe className="w-4 h-4 text-blue-700 shrink-0 mt-0.5" />
+              <div>
+                <h4 className="text-xs font-bold text-blue-950 uppercase tracking-wider mb-1">
+                  International Geographical Climate Condition Model: {climate.geographical_condition.zone_name}
+                </h4>
+                <p className="text-xs text-blue-900/90 leading-relaxed">
+                  {climate.geographical_condition.description} All Indian locations automatically use real-time live meteorological feeds, while international sites use verified geographical biome baselines.
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* What the Shelter Needs in this Location */}

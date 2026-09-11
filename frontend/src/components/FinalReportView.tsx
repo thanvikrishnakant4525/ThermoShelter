@@ -69,15 +69,15 @@ export const FinalReportView: React.FC<FinalReportViewProps> = ({
   };
 
   return (
-    <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div className="max-w-5xl mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-8">
       {/* Action Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-200 mb-8">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 pb-5 sm:pb-6 border-b border-slate-200 mb-6 sm:mb-8">
         <div>
-          <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-semibold mb-1.5">
+          <div className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-0.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-[11px] sm:text-xs font-semibold mb-1 sm:mb-1.5">
             <CheckCircle2 className="w-3.5 h-3.5" />
             <span>Design Specification Finalized</span>
           </div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">
+          <h1 className="text-xl sm:text-3xl font-bold text-slate-900 tracking-tight">
             ThermoShelter Technical Engineering Report
           </h1>
           <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
@@ -85,11 +85,11 @@ export const FinalReportView: React.FC<FinalReportViewProps> = ({
           </p>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 w-full sm:w-auto">
           <button
             onClick={handleDownloadPdf}
             disabled={isExportingPdf}
-            className="px-5 py-2.5 bg-blue-700 hover:bg-blue-800 text-white rounded-lg text-xs font-semibold flex items-center gap-2 shadow-sm transition-all disabled:opacity-50"
+            className="w-full sm:w-auto px-5 py-2.5 sm:py-2.5 bg-blue-700 hover:bg-blue-800 text-white rounded-lg text-xs font-semibold flex items-center justify-center gap-2 shadow-sm transition-all disabled:opacity-50 cursor-pointer"
           >
             <Download className="w-4 h-4" />
             <span>{isExportingPdf ? 'Generating PDF...' : 'Download Official PDF Report'}</span>
@@ -105,41 +105,44 @@ export const FinalReportView: React.FC<FinalReportViewProps> = ({
       )}
 
       {/* Main Report Container */}
-      <div className="bg-white rounded-2xl border border-slate-200 p-8 shadow-xs space-y-8">
+      <div className="bg-white rounded-2xl border border-slate-200 p-4 sm:p-8 shadow-xs space-y-6 sm:space-y-8">
         {/* Section 1: Executive Site Summary */}
         <div>
-          <h2 className="text-sm font-bold uppercase tracking-wider text-slate-900 mb-3 flex items-center gap-2">
+          <h2 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-slate-900 mb-3 flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-blue-600"></span>
             <span>1. Site & Microclimate Profile</span>
           </h2>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 p-4 rounded-xl bg-slate-50 border border-slate-200 text-xs">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-4 p-3.5 sm:p-4 rounded-xl bg-slate-50 border border-slate-200 text-xs">
             <div>
-              <span className="text-slate-500 block text-[11px]">Location</span>
-              <span className="font-bold text-slate-900">{loc.name}</span>
+              <span className="text-slate-500 block text-[10px] sm:text-[11px]">Location</span>
+              <span className="font-bold text-slate-900 truncate block">{loc.name}</span>
             </div>
             <div>
-              <span className="text-slate-500 block text-[11px]">Coordinates</span>
-              <span className="font-mono text-slate-800">{loc.latitude.toFixed(4)}°N, {loc.longitude.toFixed(4)}°E</span>
+              <span className="text-slate-500 block text-[10px] sm:text-[11px]">Coordinates</span>
+              <span className="font-mono text-slate-800 text-[11px] block">{loc.latitude.toFixed(2)}°N, {loc.longitude.toFixed(2)}°E</span>
             </div>
             <div>
-              <span className="text-slate-500 block text-[11px]">Climate Category</span>
-              <span className="font-bold text-blue-900">{char.category} Zone</span>
+              <span className="text-slate-500 block text-[10px] sm:text-[11px]">Climate Category</span>
+              <span className="font-bold text-blue-900 block">{char.category}</span>
             </div>
             <div>
-              <span className="text-slate-500 block text-[11px]">Ambient Dry-Bulb</span>
-              <span className="font-bold text-slate-900">{env.temperature_c}°C ({env.relative_humidity_pct}% RH)</span>
+              <span className="text-slate-500 block text-[10px] sm:text-[11px]">Ambient Dry-Bulb</span>
+              <span className="font-bold text-slate-900 block">{env.temperature_c}°C ({env.relative_humidity_pct}% RH)</span>
             </div>
           </div>
         </div>
 
         {/* Section 2: Thermal Comfort Performance Table */}
         <div>
-          <h2 className="text-sm font-bold uppercase tracking-wider text-slate-900 mb-3 flex items-center gap-2">
+          <h2 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-slate-900 mb-3 flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-blue-600"></span>
             <span>2. Thermal Performance & UTCI Comparison</span>
           </h2>
           <div className="overflow-x-auto border border-slate-200 rounded-xl">
-            <table className="w-full text-xs text-left">
+            <div className="block sm:hidden px-3 py-1.5 bg-slate-50 text-[10px] text-slate-500 border-b border-slate-200">
+              👉 Swipe left/right to compare thermal data
+            </div>
+            <table className="w-full text-xs text-left min-w-[540px]">
               <thead className="bg-slate-50 text-slate-600 border-b border-slate-200 uppercase font-semibold text-[11px]">
                 <tr>
                   <th className="p-3">Scenario</th>
@@ -224,65 +227,70 @@ export const FinalReportView: React.FC<FinalReportViewProps> = ({
 
         {/* Section 4: Itemized Bill of Quantities (BOQ) */}
         <div>
-          <h2 className="text-sm font-bold uppercase tracking-wider text-slate-900 mb-3 flex items-center gap-2">
+          <h2 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-slate-900 mb-3 flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-blue-600"></span>
             <span>4. Preliminary Itemized Bill of Quantities (BOQ)</span>
           </h2>
           <div className="border border-slate-200 rounded-xl overflow-hidden">
-            <table className="w-full text-xs text-left">
-              <thead className="bg-slate-50 text-slate-600 border-b border-slate-200 uppercase font-semibold text-[11px]">
-                <tr>
-                  <th className="p-3">Component</th>
-                  <th className="p-3">Description</th>
-                  <th className="p-3">Quantity</th>
-                  <th className="p-3">Unit Rate</th>
-                  <th className="p-3 text-right">Total (INR)</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-slate-100 text-slate-700">
-                {cost.itemized_boq.map((item, idx) => (
-                  <tr key={idx}>
-                    <td className="p-3 font-semibold text-slate-900">{item.component}</td>
-                    <td className="p-3 text-slate-600">{item.description}</td>
-                    <td className="p-3">{item.quantity} {item.unit}</td>
-                    <td className="p-3 font-mono">₹{item.unit_rate_inr.toLocaleString()}</td>
-                    <td className="p-3 text-right font-mono font-semibold">₹{item.total_cost_inr.toLocaleString()}</td>
+            <div className="block sm:hidden px-3 py-1.5 bg-slate-50 text-[10px] text-slate-500 border-b border-slate-200">
+              👉 Swipe left/right to view cost items
+            </div>
+            <div className="overflow-x-auto">
+              <table className="w-full text-xs text-left min-w-[500px]">
+                <thead className="bg-slate-50 text-slate-600 border-b border-slate-200 uppercase font-semibold text-[11px]">
+                  <tr>
+                    <th className="p-3">Component</th>
+                    <th className="p-3">Description</th>
+                    <th className="p-3">Quantity</th>
+                    <th className="p-3">Unit Rate</th>
+                    <th className="p-3 text-right">Total (INR)</th>
                   </tr>
-                ))}
-                <tr className="bg-slate-50 font-medium">
-                  <td className="p-3" colSpan={4}>Materials Subtotal</td>
-                  <td className="p-3 text-right font-mono font-bold">₹{cost.material_subtotal_inr.toLocaleString()}</td>
-                </tr>
-                <tr className="bg-slate-50 font-medium">
-                  <td className="p-3" colSpan={4}>Labor & Assembly Installation (28%)</td>
-                  <td className="p-3 text-right font-mono font-bold">₹{cost.labor_estimate_inr.toLocaleString()}</td>
-                </tr>
-                <tr className="bg-blue-50 font-bold text-sm text-blue-900">
-                  <td className="p-3" colSpan={4}>PRELIMINARY GRAND TOTAL</td>
-                  <td className="p-3 text-right font-mono text-base">{cost.formatted_grand_total}</td>
-                </tr>
-              </tbody>
-            </table>
+                </thead>
+                <tbody className="divide-y divide-slate-100 text-slate-700">
+                  {cost.itemized_boq.map((item, idx) => (
+                    <tr key={idx}>
+                      <td className="p-3 font-semibold text-slate-900">{item.component}</td>
+                      <td className="p-3 text-slate-600">{item.description}</td>
+                      <td className="p-3">{item.quantity} {item.unit}</td>
+                      <td className="p-3 font-mono">₹{item.unit_rate_inr.toLocaleString()}</td>
+                      <td className="p-3 text-right font-mono font-semibold">₹{item.total_cost_inr.toLocaleString()}</td>
+                    </tr>
+                  ))}
+                  <tr className="bg-slate-50 font-medium">
+                    <td className="p-3" colSpan={4}>Materials Subtotal</td>
+                    <td className="p-3 text-right font-mono font-bold">₹{cost.material_subtotal_inr.toLocaleString()}</td>
+                  </tr>
+                  <tr className="bg-slate-50 font-medium">
+                    <td className="p-3" colSpan={4}>Labor & Assembly Installation (28%)</td>
+                    <td className="p-3 text-right font-mono font-bold">₹{cost.labor_estimate_inr.toLocaleString()}</td>
+                  </tr>
+                  <tr className="bg-blue-50 font-bold text-sm text-blue-900">
+                    <td className="p-3" colSpan={4}>PRELIMINARY GRAND TOTAL</td>
+                    <td className="p-3 text-right font-mono text-base">{cost.formatted_grand_total}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
-          <p className="text-[11px] text-slate-400 mt-2 italic">{cost.cost_disclaimer}</p>
+          <p className="text-[10px] sm:text-[11px] text-slate-400 mt-2 italic">{cost.cost_disclaimer}</p>
         </div>
 
         {/* Section 5: Accessibility & Usability Assessment */}
         <div>
-          <h2 className="text-sm font-bold uppercase tracking-wider text-slate-900 mb-3 flex items-center gap-2">
+          <h2 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-slate-900 mb-3 flex items-center gap-2">
             <Accessibility className="w-4 h-4 text-blue-700" />
             <span>5. Universal Accessibility & Liveability Assessment</span>
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
-            <div className="p-3.5 bg-slate-50 rounded-lg border border-slate-200">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-3 text-xs">
+            <div className="p-3 sm:p-3.5 bg-slate-50 rounded-lg border border-slate-200">
               <span className="font-bold text-slate-800 block mb-1">Step-Free Entry Access</span>
               Plinth height (0.25m) incorporates flush tapered ramps at entrance clearways for barrier-free wheelchair access.
             </div>
-            <div className="p-3.5 bg-slate-50 rounded-lg border border-slate-200">
+            <div className="p-3 sm:p-3.5 bg-slate-50 rounded-lg border border-slate-200">
               <span className="font-bold text-slate-800 block mb-1">Safe Clear Circulation</span>
               Continuous 1.5m minimum clear turning radius provided between structural posts and bench edges.
             </div>
-            <div className="p-3.5 bg-slate-50 rounded-lg border border-slate-200">
+            <div className="p-3 sm:p-3.5 bg-slate-50 rounded-lg border border-slate-200">
               <span className="font-bold text-slate-800 block mb-1">Splash & Rain Drainage</span>
               Perimeter gutter directs rainwater safely away to eliminate ground pooling and slippery plinth edges.
             </div>
@@ -291,11 +299,11 @@ export const FinalReportView: React.FC<FinalReportViewProps> = ({
 
         {/* Section 6: Engineering Reasoning Summary */}
         <div>
-          <h2 className="text-sm font-bold uppercase tracking-wider text-slate-900 mb-3 flex items-center gap-2">
+          <h2 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-slate-900 mb-3 flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-blue-600"></span>
             <span>6. Deterministic Engineering Rationale</span>
           </h2>
-          <div className="space-y-2 bg-slate-50 p-4 rounded-xl border border-slate-200 text-xs text-slate-700">
+          <div className="space-y-2 bg-slate-50 p-3.5 sm:p-4 rounded-xl border border-slate-200 text-xs text-slate-700">
             {option.reasoning.map((r, i) => (
               <div key={i} className="flex items-start gap-2">
                 <span className="font-bold text-blue-700 shrink-0">[{i + 1}]</span>
@@ -306,17 +314,17 @@ export const FinalReportView: React.FC<FinalReportViewProps> = ({
         </div>
 
         {/* Disclaimer */}
-        <div className="p-4 bg-amber-50/70 border border-amber-200 rounded-xl text-amber-900 text-xs leading-relaxed">
+        <div className="p-3.5 sm:p-4 bg-amber-50/70 border border-amber-200 rounded-xl text-amber-900 text-xs leading-relaxed">
           <span className="font-bold block mb-0.5">Statutory & Engineering Validation Disclaimer:</span>
           This prototype is a computational design research model developed for the Smart India Hackathon. Microclimate and thermal comfort predictions are based on peer-reviewed COST Action 730 equations and CPWD preliminary schedules. Real-world construction requires site-specific geotechnical investigations, wind structural calculations, and municipal safety clearances.
         </div>
       </div>
 
       {/* Bottom Navigation */}
-      <div className="flex items-center justify-between mt-8">
+      <div className="flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-between gap-3 mt-6 sm:mt-8">
         <button
           onClick={onBackTo3D}
-          className="px-4 py-2 border border-slate-300 text-slate-700 hover:bg-slate-100 rounded-lg text-xs font-semibold flex items-center gap-2 transition-colors"
+          className="w-full sm:w-auto px-4 py-2.5 sm:py-2 border border-slate-300 text-slate-700 hover:bg-slate-100 rounded-lg text-xs font-semibold flex items-center justify-center gap-2 transition-colors cursor-pointer"
         >
           <ArrowLeft className="w-4 h-4" />
           <span>Back to 3D Inspection</span>
@@ -324,7 +332,7 @@ export const FinalReportView: React.FC<FinalReportViewProps> = ({
 
         <button
           onClick={onRestart}
-          className="px-5 py-2 bg-slate-800 hover:bg-slate-900 text-white rounded-lg text-xs font-semibold flex items-center gap-2 transition-colors"
+          className="w-full sm:w-auto px-5 py-2.5 sm:py-2 bg-slate-800 hover:bg-slate-900 text-white rounded-lg text-xs font-semibold flex items-center justify-center gap-2 transition-colors cursor-pointer"
         >
           <RotateCcw className="w-4 h-4" />
           <span>Start New Location Design</span>

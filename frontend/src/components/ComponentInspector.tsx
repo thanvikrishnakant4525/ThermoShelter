@@ -37,23 +37,23 @@ export const ComponentInspector: React.FC<ComponentInspectorProps> = ({
   }
 
   return (
-    <div className="bg-white rounded-xl border border-slate-200 shadow-xs p-5 flex flex-col h-full justify-between">
+    <div className="bg-white rounded-xl border border-slate-200 shadow-xs p-4 sm:p-5 flex flex-col h-full justify-between">
       <div>
         {/* Header */}
-        <div className="flex items-center justify-between pb-3 border-b border-slate-100 mb-4">
-          <div className="flex items-center gap-2">
-            <Layers className="w-4 h-4 text-blue-700" />
+        <div className="flex items-center justify-between pb-3 border-b border-slate-100 mb-3 sm:mb-4">
+          <div className="flex items-center gap-1.5 sm:gap-2">
+            <Layers className="w-4 h-4 text-blue-700 shrink-0" />
             <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider">
               Component & Material Inspector
             </h3>
           </div>
-          <span className="text-[11px] font-medium text-slate-500">
-            Hover or click 3D model
+          <span className="text-[10px] sm:text-[11px] font-medium text-slate-500">
+            Tap or hover 3D model
           </span>
         </div>
 
         {/* Component Selector Tabs */}
-        <div className="flex flex-wrap gap-1.5 mb-4">
+        <div className="flex flex-wrap gap-1 sm:gap-1.5 mb-3 sm:mb-4">
           {allComponents.map((comp) => {
             const isSelected = activeComponent?.id === comp.id;
             const shortName = COMP_SHORT_NAMES[comp.id] || comp.name.split(' ').slice(0, 2).join(' ');
@@ -61,7 +61,7 @@ export const ComponentInspector: React.FC<ComponentInspectorProps> = ({
               <button
                 key={comp.id}
                 onClick={() => onSelectComponent(comp)}
-                className={`px-2.5 py-1 text-xs font-semibold rounded-md border transition-all ${
+                className={`px-2 sm:px-2.5 py-1 text-[11px] sm:text-xs font-semibold rounded-md border transition-all cursor-pointer ${
                   isSelected
                     ? 'bg-blue-700 text-white border-blue-700 shadow-2xs'
                     : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'

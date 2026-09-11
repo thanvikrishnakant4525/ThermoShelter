@@ -11,31 +11,31 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
   onTryExample
 }) => {
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-12">
       {/* Hero Section */}
-      <div className="text-center max-w-4xl mx-auto mb-16">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-slate-100 border border-slate-300 text-slate-700 text-xs font-semibold mb-5">
+      <div className="text-center max-w-4xl mx-auto mb-10 sm:mb-16">
+        <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-3.5 py-1 rounded-full bg-slate-100 border border-slate-300 text-slate-700 text-[11px] sm:text-xs font-semibold mb-4 sm:mb-5">
           <Compass className="w-3.5 h-3.5 text-blue-700" />
           <span>Area-Specific Environmental Engineering</span>
         </div>
 
-        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight">
+        <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight">
           ThermoShelter
         </h1>
 
-        <p className="text-lg sm:text-xl font-semibold text-slate-700 mt-2">
+        <p className="text-base sm:text-xl font-semibold text-slate-700 mt-2">
           Area-Specific Shelter Design for Thermal Comfort
         </p>
 
-        <p className="text-sm sm:text-base text-slate-600 mt-4 max-w-2xl mx-auto leading-relaxed">
+        <p className="text-xs sm:text-base text-slate-600 mt-3 sm:mt-4 max-w-2xl mx-auto leading-relaxed">
           Analyze real geographical environmental conditions and generate practical shelter designs adapted to the selected location, keeping people cool in scorching heat and sheltered in harsh climates.
         </p>
 
         {/* Action Buttons */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mt-8">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-2.5 sm:gap-3 mt-6 sm:mt-8 max-w-md sm:max-w-none mx-auto">
           <button
             onClick={onStartDesign}
-            className="w-full sm:w-auto px-8 py-3 bg-blue-700 hover:bg-blue-800 text-white rounded-lg text-sm font-bold flex items-center justify-center gap-2 shadow-sm transition-all"
+            className="w-full sm:w-auto px-8 py-3 bg-blue-700 hover:bg-blue-800 text-white rounded-lg text-sm font-bold flex items-center justify-center gap-2 shadow-sm transition-all cursor-pointer"
           >
             <span>Start Design</span>
             <ArrowRight className="w-4 h-4" />
@@ -43,7 +43,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
 
           <button
             onClick={onTryExample}
-            className="w-full sm:w-auto px-6 py-3 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded-lg text-sm font-semibold flex items-center justify-center gap-2 transition-all shadow-2xs"
+            className="w-full sm:w-auto px-6 py-3 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded-lg text-sm font-semibold flex items-center justify-center gap-2 transition-all shadow-2xs cursor-pointer"
           >
             <PlayCircle className="w-4 h-4 text-blue-700" />
             <span>Try Example (Jodhpur)</span>
@@ -52,9 +52,9 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
       </div>
 
       {/* Problem & Solution Technical Block */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mb-10 sm:mb-16">
         {/* Problem */}
-        <div className="bg-white p-6 sm:p-8 rounded-xl border border-slate-200 shadow-xs">
+        <div className="bg-white p-5 sm:p-8 rounded-xl border border-slate-200 shadow-xs">
           <div className="w-9 h-9 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center font-bold mb-3">
             <Thermometer className="w-5 h-5" />
           </div>

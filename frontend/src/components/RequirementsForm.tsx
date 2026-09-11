@@ -66,10 +66,10 @@ export const RequirementsForm: React.FC<RequirementsFormProps> = ({
   };
 
   return (
-    <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div className="max-w-3xl mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-8">
       {/* Title */}
-      <div className="mb-8">
-        <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">
+      <div className="mb-6 sm:mb-8">
+        <h1 className="text-xl sm:text-3xl font-bold text-slate-900 tracking-tight">
           Step 3: Define Capacity & Budget Requirements
         </h1>
         <p className="text-xs sm:text-sm text-slate-600 mt-1">
@@ -78,7 +78,7 @@ export const RequirementsForm: React.FC<RequirementsFormProps> = ({
       </div>
 
       {/* Main Parameters Form */}
-      <form onSubmit={handleSubmit} className="bg-white rounded-xl border border-slate-200 p-6 sm:p-8 shadow-xs space-y-6">
+      <form onSubmit={handleSubmit} className="bg-white rounded-xl border border-slate-200 p-4 sm:p-8 shadow-xs space-y-5 sm:space-y-6">
         {/* Purpose Confirmation */}
         <div>
           <label className="block text-xs font-bold text-slate-800 uppercase tracking-wider mb-2 flex items-center gap-2">
@@ -88,7 +88,7 @@ export const RequirementsForm: React.FC<RequirementsFormProps> = ({
           <select
             value={purpose}
             onChange={(e) => setPurpose(e.target.value)}
-            className="w-full px-3 py-2.5 text-xs font-medium bg-slate-50 border border-slate-300 rounded-lg focus:bg-white focus:outline-none focus:ring-1 focus:ring-blue-700"
+            className="w-full px-3 py-2.5 text-xs font-medium bg-slate-50 border border-slate-300 rounded-lg focus:bg-white focus:outline-none focus:ring-1 focus:ring-blue-700 cursor-pointer"
           >
             {PURPOSES.map((p) => (
               <option key={p} value={p}>
@@ -127,10 +127,10 @@ export const RequirementsForm: React.FC<RequirementsFormProps> = ({
             onChange={(e) => setCapacity(parseInt(e.target.value))}
             className="w-full accent-blue-700 h-2 bg-slate-200 rounded-lg cursor-pointer"
           />
-          <div className="flex justify-between text-[11px] text-slate-500 mt-1">
-            <span>5 people (Small kiosk)</span>
-            <span>20 people (Standard waiting stop)</span>
-            <span>60 people (Major transit hub)</span>
+          <div className="flex justify-between text-[10px] sm:text-[11px] text-slate-500 mt-1">
+            <span>5 (Small kiosk)</span>
+            <span>20 (Standard shelter)</span>
+            <span>60 (Transit hub)</span>
           </div>
         </div>
 
@@ -153,14 +153,14 @@ export const RequirementsForm: React.FC<RequirementsFormProps> = ({
             />
           </div>
           {/* Quick budget chips */}
-          <div className="flex items-center gap-2 mt-2">
-            <span className="text-[11px] text-slate-500">Quick set:</span>
+          <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 mt-2">
+            <span className="text-[10px] sm:text-[11px] text-slate-500">Quick set:</span>
             {[80000, 100000, 120000, 150000, 200000].map((b) => (
               <button
                 key={b}
                 type="button"
                 onClick={() => setBudget(b)}
-                className={`px-2 py-0.5 text-[11px] rounded border transition-colors ${
+                className={`px-2 py-0.5 text-[10px] sm:text-[11px] rounded border transition-colors cursor-pointer ${
                   budget === b ? 'bg-blue-50 text-blue-900 border-blue-400 font-bold' : 'bg-slate-50 text-slate-600 border-slate-200 hover:bg-slate-100'
                 }`}
               >
@@ -175,14 +175,14 @@ export const RequirementsForm: React.FC<RequirementsFormProps> = ({
           <label className="block text-xs font-bold text-slate-800 uppercase tracking-wider mb-3">
             Design Priority
           </label>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-3">
             {PRIORITIES.map((p) => {
               const isSelected = priority === p.id;
               return (
                 <div
                   key={p.id}
                   onClick={() => setPriority(p.id)}
-                  className={`p-3.5 rounded-lg border cursor-pointer transition-all ${
+                  className={`p-3 sm:p-3.5 rounded-lg border cursor-pointer transition-all ${
                     isSelected
                       ? 'border-blue-700 bg-blue-50/70 ring-1 ring-blue-700'
                       : 'border-slate-200 bg-slate-50 hover:bg-slate-100'
@@ -215,7 +215,7 @@ export const RequirementsForm: React.FC<RequirementsFormProps> = ({
           </div>
 
           {hasCustomDims && (
-            <div className="grid grid-cols-2 gap-3 mt-3 bg-slate-50 p-3 rounded-lg border border-slate-200">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-3 bg-slate-50 p-3 rounded-lg border border-slate-200">
               <div>
                 <span className="text-[11px] font-medium text-slate-500">Length (m)</span>
                 <input
@@ -245,11 +245,11 @@ export const RequirementsForm: React.FC<RequirementsFormProps> = ({
         </div>
 
         {/* Action Buttons */}
-        <div className="flex items-center justify-between pt-4 border-t border-slate-100">
+        <div className="flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-between gap-3 pt-4 border-t border-slate-100">
           <button
             type="button"
             onClick={onBack}
-            className="px-4 py-2 border border-slate-300 text-slate-700 hover:bg-slate-100 rounded-lg text-xs font-semibold flex items-center gap-2 transition-colors cursor-pointer"
+            className="w-full sm:w-auto px-4 py-2.5 sm:py-2 border border-slate-300 text-slate-700 hover:bg-slate-100 rounded-lg text-xs font-semibold flex items-center justify-center gap-2 transition-colors cursor-pointer"
           >
             <ArrowLeft className="w-4 h-4" />
             <span>Back to Climate</span>
@@ -258,7 +258,7 @@ export const RequirementsForm: React.FC<RequirementsFormProps> = ({
           <button
             type="submit"
             disabled={isLoading}
-            className="px-6 py-2.5 bg-blue-700 hover:bg-blue-800 text-white rounded-lg text-xs font-bold flex items-center gap-2 shadow-xs transition-all cursor-pointer"
+            className="w-full sm:w-auto px-6 py-3 sm:py-2.5 bg-blue-700 hover:bg-blue-800 text-white rounded-lg text-xs font-bold flex items-center justify-center gap-2 shadow-xs transition-all cursor-pointer"
           >
             <span>{isLoading ? 'Calculating Shelter Options...' : 'Generate 2–3 Shelter Options'}</span>
             <ArrowRight className="w-4 h-4" />

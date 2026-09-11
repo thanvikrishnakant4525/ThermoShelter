@@ -581,6 +581,10 @@ export const Shelter3DViewer: React.FC<Shelter3DViewerProps> = ({
     controls.minDistance = 3.5;
     controls.maxDistance = 45;
     controls.target.set(0, 1.4, 0);
+    controls.touches = {
+      ONE: THREE.TOUCH.ROTATE,
+      TWO: THREE.TOUCH.DOLLY_PAN
+    };
     controlsRef.current = controls;
 
     const hemiLight = new THREE.HemisphereLight(0xe0f2fe, 0x475569, 0.95);
@@ -1680,8 +1684,8 @@ export const Shelter3DViewer: React.FC<Shelter3DViewerProps> = ({
   };
 
   return (
-    <div className="relative w-full h-[560px] bg-slate-100 rounded-xl overflow-hidden border border-slate-300 shadow-inner select-none">
-      <div ref={mountRef} className="w-full h-[560px] cursor-grab active:cursor-grabbing" />
+    <div className="relative w-full h-[360px] sm:h-[460px] md:h-[520px] lg:h-[560px] bg-slate-100 rounded-xl overflow-hidden border border-slate-300 shadow-inner select-none">
+      <div ref={mountRef} className="w-full h-full cursor-grab active:cursor-grabbing touch-none" />
 
       {tooltipData && (
         <div
@@ -1691,7 +1695,7 @@ export const Shelter3DViewer: React.FC<Shelter3DViewerProps> = ({
             top: `${tooltipData.y + 14}px`,
             pointerEvents: 'none',
           }}
-          className="z-30 bg-slate-900/95 text-white border border-slate-700 p-3.5 rounded-lg shadow-xl max-w-xs text-xs animate-in fade-in duration-100"
+          className="z-30 bg-slate-900/95 text-white border border-slate-700 p-3 rounded-lg shadow-xl max-w-xs text-xs animate-in fade-in duration-100"
         >
           <div className="flex items-center gap-1.5 text-blue-400 font-bold uppercase text-[10px] tracking-wider mb-1">
             <Layers className="w-3.5 h-3.5" />
@@ -1704,45 +1708,45 @@ export const Shelter3DViewer: React.FC<Shelter3DViewerProps> = ({
             {tooltipData.comp.thermal_role}
           </div>
           <div className="text-slate-400 text-[10px] mt-1.5 pt-1.5 border-t border-slate-800 italic">
-            Click to pin and inspect engineering specs
+            Tap to pin and inspect engineering specs
           </div>
         </div>
       )}
 
       {/* Top Header Bar */}
-      <div className="absolute top-3 left-3 right-3 z-20 flex flex-wrap items-center justify-between gap-2 pointer-events-none">
-        <div className="pointer-events-auto bg-white/95 border border-slate-300 px-3.5 py-1.5 rounded-lg shadow-xs flex items-center gap-2">
-          <span className="w-2.5 h-2.5 rounded-full bg-blue-700"></span>
-          <span className="text-xs font-bold text-slate-900">{option.title}</span>
-          <span className="text-[11px] text-slate-500 font-mono">({option.orientation_deg}° orientation)</span>
+      <div className="absolute top-2 sm:top-3 left-2 sm:left-3 right-2 sm:right-3 z-20 flex flex-wrap items-center justify-between gap-1.5 sm:gap-2 pointer-events-none">
+        <div className="pointer-events-auto bg-white/95 border border-slate-300 px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-lg shadow-xs flex items-center gap-1.5 sm:gap-2">
+          <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-blue-700 shrink-0"></span>
+          <span className="text-xs font-bold text-slate-900 truncate max-w-[130px] xs:max-w-[180px] sm:max-w-none">{option.title}</span>
+          <span className="hidden xs:inline text-[10px] sm:text-[11px] text-slate-500 font-mono">({option.orientation_deg}°)</span>
         </div>
 
-        <div className="pointer-events-auto flex items-center gap-1.5 bg-white/95 border border-slate-300 p-1 rounded-lg shadow-xs text-xs">
+        <div className="pointer-events-auto flex items-center gap-1 sm:gap-1.5 bg-white/95 border border-slate-300 p-0.5 sm:p-1 rounded-lg shadow-xs text-xs">
           <button
             onClick={() => setShowAirflow(!showAirflow)}
-            className={`px-2.5 py-1 rounded flex items-center gap-1.5 font-medium transition-colors cursor-pointer ${
+            className={`px-2 sm:px-2.5 py-1 rounded flex items-center gap-1 text-xs font-medium transition-colors cursor-pointer ${
               showAirflow ? 'bg-sky-100 text-sky-900 font-bold' : 'text-slate-600 hover:bg-slate-100'
             }`}
             title="Toggle animated wind streamlines"
           >
-            <Wind className="w-3.5 h-3.5" />
-            <span>Airflow</span>
+            <Wind className="w-3.5 h-3.5 shrink-0" />
+            <span className="hidden xs:inline">Airflow</span>
           </button>
 
           <button
             onClick={() => setShowSolarShadows(!showSolarShadows)}
-            className={`px-2.5 py-1 rounded flex items-center gap-1.5 font-medium transition-colors cursor-pointer ${
+            className={`px-2 sm:px-2.5 py-1 rounded flex items-center gap-1 text-xs font-medium transition-colors cursor-pointer ${
               showSolarShadows ? 'bg-amber-100 text-amber-900 font-bold' : 'text-slate-600 hover:bg-slate-100'
             }`}
             title="Toggle solar shadows"
           >
-            <Sun className="w-3.5 h-3.5" />
-            <span>Sun ({climate.solar_position.altitude_deg}°)</span>
+            <Sun className="w-3.5 h-3.5 shrink-0" />
+            <span className="hidden xs:inline">Sun</span>
           </button>
 
           <button
             onClick={handleResetView}
-            className="p-1.5 text-slate-600 hover:bg-slate-100 rounded transition-colors cursor-pointer"
+            className="p-1 text-slate-600 hover:bg-slate-100 rounded transition-colors cursor-pointer"
             title="Reset Camera Framing to Front Entrance"
           >
             <RotateCcw className="w-3.5 h-3.5" />
@@ -1751,11 +1755,13 @@ export const Shelter3DViewer: React.FC<Shelter3DViewerProps> = ({
       </div>
 
       {/* Bottom Controls Bar */}
-      <div className="absolute bottom-3 left-3 right-3 z-20 flex flex-col sm:flex-row items-center justify-between gap-3 pointer-events-none">
-        <div className="pointer-events-auto bg-white/95 border border-slate-300 px-3.5 py-2 rounded-lg shadow-xs flex items-center gap-3 w-full sm:w-auto">
-          <Sliders className="w-4 h-4 text-slate-600 shrink-0" />
-          <div className="flex items-center gap-2">
-            <span className="text-xs font-bold text-slate-800 whitespace-nowrap">Exploded View:</span>
+      <div className="absolute bottom-2 sm:bottom-3 left-2 sm:left-3 right-2 sm:right-3 z-20 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2 sm:gap-3 pointer-events-none">
+        <div className="pointer-events-auto bg-white/95 border border-slate-300 px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-lg shadow-xs flex items-center justify-between sm:justify-start gap-2 sm:gap-3 w-full sm:w-auto">
+          <div className="flex items-center gap-1.5 shrink-0">
+            <Sliders className="w-3.5 h-3.5 text-slate-600 shrink-0" />
+            <span className="text-[11px] sm:text-xs font-bold text-slate-800 whitespace-nowrap">Exploded:</span>
+          </div>
+          <div className="flex items-center gap-1.5 sm:gap-2 flex-1 sm:flex-initial">
             <input
               type="range"
               min="0"
@@ -1763,32 +1769,32 @@ export const Shelter3DViewer: React.FC<Shelter3DViewerProps> = ({
               step="0.02"
               value={explodedFactor}
               onChange={(e) => setExplodedFactor(parseFloat(e.target.value))}
-              className="w-28 sm:w-36 accent-blue-700 h-1.5 bg-slate-200 rounded cursor-pointer"
+              className="w-full sm:w-32 accent-blue-700 h-1.5 bg-slate-200 rounded cursor-pointer"
             />
-            <span className="text-xs font-mono text-slate-600 w-8">{Math.round(explodedFactor * 100)}%</span>
-            {explodedFactor > 0 ? (
-              <button
-                onClick={() => setExplodedFactor(0)}
-                className="text-[11px] font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 px-2 py-0.5 rounded cursor-pointer transition-colors"
-                title="Reset to assembled view (0%)"
-              >
-                Assemble
-              </button>
-            ) : (
-              <button
-                onClick={() => setExplodedFactor(0.75)}
-                className="text-[11px] font-semibold bg-blue-50 hover:bg-blue-100 text-blue-700 px-2 py-0.5 rounded cursor-pointer transition-colors"
-                title="Quick Explode to 75%"
-              >
-                Disassemble
-              </button>
-            )}
+            <span className="text-[11px] sm:text-xs font-mono text-slate-600 w-7 sm:w-8 shrink-0">{Math.round(explodedFactor * 100)}%</span>
           </div>
+          {explodedFactor > 0 ? (
+            <button
+              onClick={() => setExplodedFactor(0)}
+              className="text-[10px] sm:text-[11px] font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 px-2 py-0.5 rounded cursor-pointer transition-colors shrink-0"
+              title="Reset to assembled view (0%)"
+            >
+              Assemble
+            </button>
+          ) : (
+            <button
+              onClick={() => setExplodedFactor(0.75)}
+              className="text-[10px] sm:text-[11px] font-semibold bg-blue-50 hover:bg-blue-100 text-blue-700 px-2 py-0.5 rounded cursor-pointer transition-colors shrink-0"
+              title="Quick Explode to 75%"
+            >
+              Disassemble
+            </button>
+          )}
         </div>
 
-        <div className="pointer-events-auto bg-slate-900/85 text-white px-3.5 py-1.5 rounded-lg shadow-xs text-[11px] flex items-center gap-2">
-          <Compass className="w-3 h-3 text-amber-400" />
-          <span>Left-drag: Rotate • Scroll: Zoom • Click Mesh: Pin Specs • Orange N: North</span>
+        <div className="hidden sm:flex pointer-events-auto bg-slate-900/85 text-white px-3 py-1.5 rounded-lg shadow-xs text-[10px] sm:text-[11px] items-center gap-1.5 self-center">
+          <Compass className="w-3 h-3 text-amber-400 shrink-0" />
+          <span>Drag to rotate • Pinch/scroll to zoom • Tap mesh to pin specs</span>
         </div>
       </div>
     </div>

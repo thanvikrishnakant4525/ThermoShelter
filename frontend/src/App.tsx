@@ -249,24 +249,24 @@ export const App: React.FC = () => {
 
         {/* Screen 5: 3D Architectural Model View (Step 5) */}
         {currentStep === 5 && selectedOption && climateData && (
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+          <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-8">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 mb-5 sm:mb-6">
               <div>
-                <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-blue-50 border border-blue-200 text-blue-800 text-xs font-semibold mb-1.5">
+                <div className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-0.5 rounded-full bg-blue-50 border border-blue-200 text-blue-800 text-[11px] sm:text-xs font-semibold mb-1 sm:mb-1.5">
                   <Box className="w-3.5 h-3.5" />
-                  <span>Step 5: Interactive 3D Model & Component Raycasting</span>
+                  <span>Step 5: Interactive 3D Model & Raycasting</span>
                 </div>
-                <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">
+                <h1 className="text-xl sm:text-3xl font-bold text-slate-900 tracking-tight">
                   Detailed 3D Architecture Visualizer
                 </h1>
                 <p className="text-xs sm:text-sm text-slate-600 mt-1">
-                  Hover over roof, louvers, structure, or benches to inspect their physical thermal function and site-driven engineering rationale.
+                  Tap or hover over roof, louvers, structure, or benches to inspect physical thermal roles and engineering rationale.
                 </p>
               </div>
 
               {/* Option Switcher Buttons */}
               {generationData && (
-                <div className="flex items-center gap-1.5 bg-white border border-slate-200 p-1 rounded-lg shadow-2xs">
+                <div className="flex items-center gap-1 sm:gap-1.5 bg-white border border-slate-200 p-1 rounded-lg shadow-2xs self-start sm:self-auto overflow-x-auto max-w-full">
                   {generationData.options_list.map((opt) => (
                     <button
                       key={opt.id}
@@ -274,7 +274,7 @@ export const App: React.FC = () => {
                         setSelectedOption(opt);
                         if (opt.components_3d.length > 0) setActiveComponent3D(opt.components_3d[0]);
                       }}
-                      className={`px-3 py-1 text-xs font-semibold rounded-md transition-all ${
+                      className={`px-2.5 sm:px-3 py-1 text-xs font-semibold rounded-md transition-all cursor-pointer whitespace-nowrap ${
                         selectedOption.id === opt.id
                           ? 'bg-blue-700 text-white shadow-2xs'
                           : 'text-slate-600 hover:bg-slate-100'
@@ -288,7 +288,7 @@ export const App: React.FC = () => {
             </div>
 
             {/* 3D Visualizer & Inspector Layout (8 cols + 4 cols) */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-8">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 mb-6 sm:mb-8">
               <div className="lg:col-span-8">
                 <Shelter3DViewer
                   option={selectedOption}
@@ -309,10 +309,10 @@ export const App: React.FC = () => {
             </div>
 
             {/* Bottom Navigation */}
-            <div className="flex items-center justify-between">
+            <div className="flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-between gap-3">
               <button
                 onClick={() => setCurrentStep(4)}
-                className="px-4 py-2 border border-slate-300 text-slate-700 hover:bg-slate-100 rounded-lg text-xs font-semibold flex items-center gap-2 transition-colors"
+                className="w-full sm:w-auto px-4 py-2.5 sm:py-2 border border-slate-300 text-slate-700 hover:bg-slate-100 rounded-lg text-xs font-semibold flex items-center justify-center gap-2 transition-colors cursor-pointer"
               >
                 <ArrowLeft className="w-4 h-4" />
                 <span>Back to Options Comparison</span>
@@ -323,7 +323,7 @@ export const App: React.FC = () => {
                   setCurrentStep(6);
                   setMaxAccessibleStep(Math.max(maxAccessibleStep, 6));
                 }}
-                className="px-6 py-2.5 bg-blue-700 hover:bg-blue-800 text-white rounded-lg text-sm font-semibold flex items-center gap-2 shadow-sm transition-all"
+                className="w-full sm:w-auto px-6 py-3 sm:py-2.5 bg-blue-700 hover:bg-blue-800 text-white rounded-lg text-xs sm:text-sm font-semibold flex items-center justify-center gap-2 shadow-sm transition-all cursor-pointer"
               >
                 <span>Finalize Design & View Report</span>
                 <ArrowRight className="w-4 h-4" />

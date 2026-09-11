@@ -63,6 +63,7 @@ class ClimateAnalyzeRequest(BaseModel):
     longitude: float
     location_name: Optional[str] = "Selected Location"
     elevation_m: Optional[float] = 0.0
+    country: Optional[str] = ""
 
 class ThermalAnalyzeRequest(BaseModel):
     temperature_c: float
@@ -141,7 +142,8 @@ def analyze_climate(req: ClimateAnalyzeRequest):
         latitude=req.latitude,
         longitude=req.longitude,
         location_name=req.location_name or "Selected Location",
-        elevation=req.elevation_m or 0.0
+        elevation=req.elevation_m or 0.0,
+        country=req.country or ""
     )
     return data
 

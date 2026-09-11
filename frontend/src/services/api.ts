@@ -61,7 +61,8 @@ export async function analyzeClimate(
   latitude: number,
   longitude: number,
   locationName: string,
-  elevationM: number = 0
+  elevationM: number = 0,
+  country: string = ''
 ): Promise<ClimateAnalysisResponse> {
   const res = await fetch(`${API_BASE}/climate/analyze`, {
     method: 'POST',
@@ -70,7 +71,8 @@ export async function analyzeClimate(
       latitude,
       longitude,
       location_name: locationName,
-      elevation_m: elevationM
+      elevation_m: elevationM,
+      country
     }),
   });
   if (!res.ok) throw new Error('Failed to analyze climate');
